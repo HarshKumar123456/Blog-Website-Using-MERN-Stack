@@ -1,0 +1,50 @@
+main{
+    border: 2px solid red;
+    min-height: 60vh;
+}
+
+.blog-type {
+  text-align: center;
+}
+
+.blog-container-flexbox-items {
+  /* border: 2px solid yellow; */
+  border-radius: 1.2rem;
+  padding: 1rem;
+  box-shadow: 1px 1px rgb(110, 105, 105);
+  background-color: rgb(255, 254, 252);
+}
+
+.blog-container-flexbox {
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* border: 2px solid red; */
+  padding: 4rem;
+}
+
+.blog-container-flexbox-items>h3 {
+  font-size: 2.5rem;
+}
+
+.cancel-blog-creation{
+  text-decoration: none;
+}
+
+.form-container{
+  display: grid;
+  gap: 2rem;
+}
+
+.button-container{
+  display: flex;
+  gap: 1rem;
+  width: 4rem;
+}
+
+.options-to-do-with-blog{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
