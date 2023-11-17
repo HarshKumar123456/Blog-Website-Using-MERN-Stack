@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BlogItem from './BlogItem'; // Import your BlogItem component
 import DetailedBlogView from './DetailedViewOfBlog';
 import NewBlog from './NewBlog';
+import EditBlog from './EditBlog';
 
 const Index = ({ route }) => {
   const [typeOfBlogs, setTypeOfBlogs] = useState('');
@@ -52,14 +53,43 @@ const Index = ({ route }) => {
     setSelectedBlog(selectedBlog);
   };
 
-  const handleEdit = () => {
+
+  const [editButtonClicked,setEditButtonClickedStatus] = useState(false);
+  const handleEdit = (blog) => {
     // Handle edit action
     console.log('Edit action clicked');
+    console.log(blog);
+    setEditButtonClickedStatus(!editButtonClicked);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async (blog) => {
+    setSelectedBlog(null);
     // Handle delete action
     console.log('Delete action clicked');
+    console.log(blog);
+    try {
+      const response = await fetch('http://localhost:8000/actions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+          {
+            action: "delete",
+            blogId: blog._id,
+            blogType: typeOfBlogs,
+          }
+        ),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create new blog');
+      }
+
+      fetchData(route); // Fetch updated blog list after deleting the blog
+    } catch (error) {
+      console.error('Error creating new blog:', error);
+    }
   };
 
   const createNewBlog = async (blogData) => {
@@ -89,6 +119,7 @@ const Index = ({ route }) => {
   }
   return (
     <>
+      {editButtonClicked && <EditBlog blog = {{...selectedBlog, type: typeOfBlogs,}}/>}
       {selectedBlog && (
         <DetailedBlogView
           blog={selectedBlog}

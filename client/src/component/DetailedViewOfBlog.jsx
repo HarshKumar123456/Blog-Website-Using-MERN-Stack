@@ -24,7 +24,10 @@ const DetailedBlogView = ({ blog, handleEdit, handleDelete }) => {
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={handleDelete}
+              onClick={(event) => {
+                handleDelete(blog);
+                event.preventDefault();
+              }}
             >
               Delete
             </button>

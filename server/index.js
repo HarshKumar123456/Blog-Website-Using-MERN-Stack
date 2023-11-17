@@ -143,16 +143,7 @@ app.post('/addBlog', async (req, res) => {
   app.post('/actions', async (req, res) => {
     const action = req.body.action;
   
-    const blogToUpdate = {
-      _id: req.body.blogId,
-      type: req.body.blogType,
-      title: req.body.blogTitle,
-      content: req.body.blogContent,
-    };
-  
-    if (action === 'edit') {
-      res.json({ blog: blogToUpdate });
-    } else if (action === 'delete') {
+    if (action === 'delete') {
       if (req.body.blogType === 'College') {
         await collegeBlogModel.findByIdAndDelete({ _id: req.body.blogId });
       } else {
@@ -164,6 +155,7 @@ app.post('/addBlog', async (req, res) => {
       console.log(action);
       res.sendStatus(404);
     }
+    
   });
   
   app.post('/updateBlog', async (req, res) => {
