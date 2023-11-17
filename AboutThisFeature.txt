@@ -1,0 +1,1 @@
+In this feature we will be adding a text editor instead of just a simple textarea.
