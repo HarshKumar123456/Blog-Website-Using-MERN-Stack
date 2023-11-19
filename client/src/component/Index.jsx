@@ -54,7 +54,7 @@ const Index = ({ route }) => {
   };
 
 
-  const [editButtonClicked, setEditButtonClickedStatus] = useState(false);
+  const [editButtonClicked,setEditButtonClickedStatus] = useState(false);
   const handleEdit = (blog) => {
     // Handle edit action
     console.log('Edit action clicked');
@@ -112,14 +112,14 @@ const Index = ({ route }) => {
     }
   };
 
-  const [createButtonClicked, setCreateButtonClickedStatus] = useState(false);
+  const [createButtonClicked,setCreateButtonClickedStatus] = useState(false);
 
-  async function handleCreateButtonClick() {
+  async function handleCreateButtonClick(){
     setCreateButtonClickedStatus(!createButtonClicked);
   }
   return (
     <>
-      {editButtonClicked && <EditBlog blog={{ ...selectedBlog, type: typeOfBlogs, }} />}
+      {editButtonClicked && <EditBlog blog = {{...selectedBlog, type: typeOfBlogs,}}/>}
       {selectedBlog && (
         <DetailedBlogView
           blog={selectedBlog}
@@ -127,12 +127,12 @@ const Index = ({ route }) => {
           handleDelete={handleDelete}
         />
       )}
-
+      
       <div className="heading container">
         <h1>Track your days....</h1>
         {createButtonClicked && <NewBlog typeOfBlog={typeOfBlogs} onCreateBlog={createNewBlog} />}
         <form action="/newBlog" method="post">
-
+          
           <button type="submit" className="btn btn-outline-success" onClick={(event) => {
             console.log("Create a new blog ....");
             handleCreateButtonClick();
@@ -144,7 +144,7 @@ const Index = ({ route }) => {
       <h2 className="blog-type">{typeOfBlogs}</h2>
 
       {isLoading ? (
-        <div className="container p-2">Loading...</div>
+        <p>Loading...</p>
       ) : (
         <>
           {blogs.length !== 0 ? (
@@ -154,7 +154,7 @@ const Index = ({ route }) => {
               ))}
             </div>
           ) : (
-            <div className="container p-2">No blogs available.</div>
+            <p>No blogs available.</p>
           )}
         </>
       )}
