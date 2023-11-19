@@ -1,4 +1,17 @@
 import React, { useState } from 'react';
+import ReactQuill from 'react-quill';
+import "react-quill/dist/quill.snow.css";
+
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic"],
+    ["link", "blockquote", "code-block", "image"],
+    [{ list: "ordered" }, { list: "bullet" }],
+
+  ]
+};
 
 const EditBlog = ({ blog }) => {
   const [blogTitle, setBlogTitle] = useState(blog.title);
@@ -44,15 +57,12 @@ const EditBlog = ({ blog }) => {
           value={blogTitle}
           onChange={(e) => setBlogTitle(e.target.value)}
         />
-        <textarea
-          name="blogContent"
-          id="blogContent"
-          cols="30"
-          rows="10"
+        <ReactQuill
           value={blogContent}
-          onChange={(e) => setBlogContent(e.target.value)}
+          modules={modules} onChange={setBlogContent}
+          theme="snow"
         />
-        <div className="button-container">
+        <div className="button-container mt-4">
           <button type="submit" className="btn btn-outline-success">
             Save
           </button>
