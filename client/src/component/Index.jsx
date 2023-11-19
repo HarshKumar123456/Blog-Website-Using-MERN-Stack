@@ -144,7 +144,7 @@ const Index = ({ route }) => {
       <h2 className="blog-type">{typeOfBlogs}</h2>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <div className="container">Loading...</div>
       ) : (
         <>
           {blogs.length !== 0 ? (
@@ -154,7 +154,7 @@ const Index = ({ route }) => {
               ))}
             </div>
           ) : (
-            <p>No blogs available.</p>
+            <div className="container">No blogs available.</div>
           )}
         </>
       )}
