@@ -1,4 +1,5 @@
 import React from 'react';
+import parse from "html-react-parser";
 
 const DetailedBlogView = ({ blog, handleEdit, handleDelete }) => {
   return (
@@ -6,10 +7,10 @@ const DetailedBlogView = ({ blog, handleEdit, handleDelete }) => {
       <div className="options-to-do-with-blog">
         <h2 className="blog-type">{blog.type}</h2>
         <form action="/actions" method="post">
-          <input type="hidden" name="blogType" value={blog.type} />
+          {/* <input type="hidden" name="blogType" value={blog.type} />
           <input type="hidden" name="blogId" value={blog._id} />
           <input type="hidden" name="blogTitle" value={blog.title} />
-          <input type="hidden" name="blogContent" value={blog.content} />
+          <input type="hidden" name="blogContent" value={blog.content} /> */}
           <div className="option-buttons">
             <button
               type="button"
@@ -38,7 +39,7 @@ const DetailedBlogView = ({ blog, handleEdit, handleDelete }) => {
       <div className="container blog-container-flexbox">
         <div className="container blog-container-flexbox-items" id={blog._id}>
           <h3>{blog.title}</h3>
-          <p>{blog.content}</p>
+          <p>{parse(blog.content)}</p>
         </div>
       </div>
     </>
