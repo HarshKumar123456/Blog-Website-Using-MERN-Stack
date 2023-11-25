@@ -3,6 +3,8 @@
 
 This project is a robust and dynamic Blog Website built using the MERN (MongoDB, Express.js, React, Node.js) stack, now enhanced with the powerful Quill text editor for an enriched writing experience.
 
+# Demo
+Video link https://drive.google.com/file/d/1B-Qb6ISW5etgsiXHmeVNUC-2wJT0OOEJ/view?usp=drive_link
 
 ## Environment Variables
 
