@@ -6,6 +6,9 @@ This project is a robust and dynamic Blog Website built using the MERN (MongoDB,
 # Demo
 Video link https://drive.google.com/file/d/1B-Qb6ISW5etgsiXHmeVNUC-2wJT0OOEJ/view?usp=drive_link
 
+# Deployment Of Front End Code On Vercel
+Video link https://drive.google.com/file/d/1Au-7A94Cp896vfiyeIw9eXz8uerWNb1g/view?usp=sharing
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
@@ -74,4 +77,6 @@ npm run dev
 ```
 
 #### Open http://localhost:5173/ in Browser and You're all set
+
+
 
