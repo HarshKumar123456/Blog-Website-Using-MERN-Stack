@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BlogItem from './BlogItem'; // Import your BlogItem component
+import BlogItem from './BlogItem';
 import DetailedBlogView from './DetailedViewOfBlog';
 import NewBlog from './NewBlog';
 import EditBlog from './EditBlog';
@@ -13,18 +13,20 @@ const Index = ({ route }) => {
     fetchData(route);
   }, [route]);
 
+  const serverUrl = import.meta.env.VITE_SERVER_URL;
+
   const fetchData = async (route) => {
     let apiUrl;
 
     switch (route) {
       case '/school':
-        apiUrl = 'http://localhost:8000/school';
+        apiUrl = `${serverUrl}/school`;
         break;
       case '/college':
-        apiUrl = 'http://localhost:8000/college';
+        apiUrl = `${serverUrl}/college`;
         break;
       default:
-        apiUrl = 'http://localhost:8000'; // Default endpoint for "/"
+        apiUrl = `${serverUrl}`; // Default endpoint for "/"
         break;
     }
 
@@ -54,7 +56,7 @@ const Index = ({ route }) => {
   };
 
 
-  const [editButtonClicked,setEditButtonClickedStatus] = useState(false);
+  const [editButtonClicked, setEditButtonClickedStatus] = useState(false);
   const handleEdit = (blog) => {
     // Handle edit action
     console.log('Edit action clicked');
@@ -68,7 +70,7 @@ const Index = ({ route }) => {
     console.log('Delete action clicked');
     console.log(blog);
     try {
-      const response = await fetch('http://localhost:8000/actions', {
+      const response = await fetch(`${serverUrl}/actions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +96,7 @@ const Index = ({ route }) => {
 
   const createNewBlog = async (blogData) => {
     try {
-      const response = await fetch('http://localhost:8000/addBlog', {
+      const response = await fetch(`${serverUrl}/addBlog`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,14 +114,14 @@ const Index = ({ route }) => {
     }
   };
 
-  const [createButtonClicked,setCreateButtonClickedStatus] = useState(false);
+  const [createButtonClicked, setCreateButtonClickedStatus] = useState(false);
 
-  async function handleCreateButtonClick(){
+  async function handleCreateButtonClick() {
     setCreateButtonClickedStatus(!createButtonClicked);
   }
   return (
     <>
-      {editButtonClicked && <EditBlog blog = {{...selectedBlog, type: typeOfBlogs,}}/>}
+      {editButtonClicked && <EditBlog blog={{ ...selectedBlog, type: typeOfBlogs, }} />}
       {selectedBlog && (
         <DetailedBlogView
           blog={selectedBlog}
@@ -127,12 +129,12 @@ const Index = ({ route }) => {
           handleDelete={handleDelete}
         />
       )}
-      
+
       <div className="heading container">
         <h1>Track your days....</h1>
         {createButtonClicked && <NewBlog typeOfBlog={typeOfBlogs} onCreateBlog={createNewBlog} />}
         <form action="/newBlog" method="post">
-          
+
           <button type="submit" className="btn btn-outline-success" onClick={(event) => {
             console.log("Create a new blog ....");
             handleCreateButtonClick();
