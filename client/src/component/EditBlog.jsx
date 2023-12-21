@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import "react-quill/dist/quill.snow.css";
-
+import 'react-quill/dist/quill.snow.css';
 
 const modules = {
   toolbar: [
     [{ header: [1, 2, 3, false] }],
-    ["bold", "italic"],
-    ["link", "blockquote", "code-block", "image"],
-    [{ list: "ordered" }, { list: "bullet" }],
-
-  ]
+    ['bold', 'italic'],
+    ['link', 'blockquote', 'code-block', 'image'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+  ],
 };
 
 const EditBlog = ({ blog }) => {
   const [blogTitle, setBlogTitle] = useState(blog.title);
   const [blogContent, setBlogContent] = useState(blog.content);
 
+  const serverUrl = import.meta.env.VITE_SERVER_URL;
+
   const handleSave = async (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     try {
-      const response = await fetch('http://localhost:8000/updateBlog', {
+      const response = await fetch(`${serverUrl}/updateBlog`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const EditBlog = ({ blog }) => {
 
   return (
     <>
-      <h1>Track your days....</h1>
+      <h1>Edit Blog</h1>
       <form onSubmit={handleSave} className="form-container">
         <input type="hidden" name="blogType" value={blog.type} />
         <input type="hidden" name="blogId" value={blog._id} />
@@ -59,14 +59,15 @@ const EditBlog = ({ blog }) => {
         />
         <ReactQuill
           value={blogContent}
-          modules={modules} onChange={setBlogContent}
+          modules={modules}
+          onChange={setBlogContent}
           theme="snow"
         />
         <div className="button-container mt-4">
           <button type="submit" className="btn btn-outline-success">
             Save
           </button>
-          <a href={`/${blog.type}`} className="cancel-blog-creation btn btn-outline-danger">
+          <a href={`/${(blog.type).toLowerCase()}`} className="cancel-blog-creation btn btn-outline-danger">
             Cancel
           </a>
         </div>
